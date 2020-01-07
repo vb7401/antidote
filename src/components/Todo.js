@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {Link} from "react-router-dom";
+import TodoList from "./TodoList.js"
 
 import Paper from "@material-ui/core/Paper";
 import AddIcon from '@material-ui/icons/Add';
 
 export default function Todo(props) {
-
   return (
     <React.Fragment>
       <Paper style={todoStyle.note}>
@@ -15,6 +15,7 @@ export default function Todo(props) {
           </Link>
           <AddIcon style={todoStyle.add} fontSize="small"/> 
         </div>
+        <TodoList todos={props.todos} />
       </Paper>
     </React.Fragment>
   );
@@ -24,11 +25,11 @@ const todoStyle = {
   note: {
     padding: "16px",
     margin: "16px",
-    textAlign: "center"
   },
   link: {
     textDecoration: 'underline',
-    color: 'black'
+    color: 'black',
+    textAlign: "center",
   },
   add: {
     float: 'right',
