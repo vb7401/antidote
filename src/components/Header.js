@@ -16,7 +16,7 @@ export default function Header(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" style={headerStyle.title}>
-            <b>antidote #</b>
+            <b>scheduler #</b>
             {props.pathEl.map(el => (
               <React.Fragment>
                 {el.ind === "all" ? "" : "/"}

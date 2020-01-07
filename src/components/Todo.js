@@ -11,7 +11,7 @@ export default function Todo(props) {
       <Paper style={todoStyle.note}>
         <div>
           <Link style={todoStyle.link} to={`/${props.path}/${props.label}`}>
-            {props.label}
+            <b>{props.label}</b>
           </Link>
           <AddIcon style={todoStyle.add} fontSize="small"/> 
         </div>
@@ -27,7 +27,7 @@ const todoStyle = {
     margin: "16px",
   },
   link: {
-    textDecoration: 'underline',
+    textDecoration: 'none',
     color: 'black',
     textAlign: "center",
   },

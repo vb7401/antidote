@@ -89,10 +89,30 @@ var display = {
       sublabel: "6.009"
     },
     {
+      title: "Journal",
+      label: "goals",
+      sublabel: "daily",
+    },
+    {
+      title: "Make Music",
+      label: "goals",
+      sublabel: "daily",
+    },
+    {
+      title: "Lift for Six Days",
+      label: "goals",
+      sublabel: "weekly",
+    },
+    {
       title: "Respond to Aayush",
       label: "tasks",
       sublabel: "small",
-    }
+    },
+    {
+      title: "Thank Quora Recruiter",
+      label: "tasks",
+      sublabel: "medium",
+    },
   ],
   children: [
     {
