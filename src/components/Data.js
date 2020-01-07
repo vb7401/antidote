@@ -2,6 +2,28 @@ export default function display() {
   return {
     label: "all",
     labels: ["tasks", "school", "goals"],
+    todos: [
+      {
+        title: "18.600 PSET 3",
+        label: "school",
+        sublabel: "18.600"
+      },
+      {
+        title: "6.890 Final Project",
+        label: "school",
+        sublabel: "6.890"
+      },
+      {
+        title: "6.009 Lab 5",
+        label: "school",
+        sublabel: "6.009"
+      },
+      {
+        title: "Respond to Aayush",
+        label: "tasks",
+        sublabel: "small",
+      }
+    ],
     children: [
       {
         label: "tasks",

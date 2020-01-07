@@ -1,28 +1,36 @@
 import React, { useState } from "react";
-import {
-  Link,
-  useRouteMatch
-} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import Paper from "@material-ui/core/Paper";
+import AddIcon from '@material-ui/icons/Add';
 
 export default function Todo(props) {
-  const [todos, setTodos] = useState([]);
-  const [labels, setLabels] = useState([]);
 
-  const match = useRouteMatch();
-  console.log(match.path);
   return (
     <React.Fragment>
-      <Paper style={noteStyle}>
-        <Link to={`${match.path}/${props.label}`}>{props.label}</Link>
+      <Paper style={todoStyle.note}>
+        <div>
+          <Link style={todoStyle.link} to={`/${props.path}/${props.label}`}>
+            {props.label}
+          </Link>
+          <AddIcon style={todoStyle.add} fontSize="small"/> 
+        </div>
       </Paper>
     </React.Fragment>
   );
 }
 
-const noteStyle = {
-  padding: "16px",
-  margin: "16px",
-  textAlign: "center"
+const todoStyle = {
+  note: {
+    padding: "16px",
+    margin: "16px",
+    textAlign: "center"
+  },
+  link: {
+    textDecoration: 'underline',
+    color: 'black'
+  },
+  add: {
+    float: 'right',
+  }
 };

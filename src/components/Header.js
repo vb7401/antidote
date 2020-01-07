@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -6,27 +7,27 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
-export default class Header extends React.Component {
-  render() {
-    return (
-      <div className={headerStyle.root}>
-        <AppBar style={headerStyle.bar} position="static">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h5" style={headerStyle.title}>
-              <b>antidote</b> <u>#{this.props.label}</u>
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </div>
-    );
-  }
+export default function Header(props) {
+  return (
+    <div className={headerStyle.root}>
+      <AppBar style={headerStyle.bar} position="static">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h5" style={headerStyle.title}>
+            <b>antidote #</b>
+            {props.pathEl.map(el => (
+              <React.Fragment>
+                {el.ind === "all" ? "" : "/"}
+                <Link to={"/" + el.prefix} style={headerStyle.link}>{el.ind}</Link>
+              </React.Fragment>
+            ))}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
 const headerStyle = {
@@ -38,6 +39,10 @@ const headerStyle = {
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+  },
+  link: {
+    textDecoration: 'underline',
+    color: 'white'
   }
 };
