@@ -5,3 +5,6 @@ goals for Tuesday demo:
   - list existing tasks
   - add feature to add tasks 
   - basic backend
+
+clean up CSS + text size split, make sure everything is in the style struct
+clean up header + menu

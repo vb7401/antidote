@@ -16,11 +16,13 @@ export default function Header(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" style={headerStyle.title}>
-            <b>scheduler #</b>
+            <b>todos #</b>
             {props.pathEl.map(el => (
               <React.Fragment>
                 {el.ind === "all" ? "" : "/"}
-                <Link to={"/" + el.prefix} style={headerStyle.link}>{el.ind}</Link>
+                <Link to={"/" + el.prefix} style={headerStyle.link}>
+                  {el.ind}
+                </Link>
               </React.Fragment>
             ))}
           </Typography>
@@ -39,10 +41,10 @@ const headerStyle = {
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   link: {
-    textDecoration: 'underline',
-    color: 'white'
+    textDecoration: "underline",
+    color: "white"
   }
 };

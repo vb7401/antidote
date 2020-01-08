@@ -28,8 +28,9 @@ const todoListStyle = {
     sublabel: {
         fontSize: 'small',
         marginLeft: '10px',
-        backgroundColor: '#383838',
-        color: 'white',
+        // background: 'linear-gradient(45deg, #6C5B7B 10%, #C06C84 90%)',
+        background: "#6C5B7B",
+        color: "white",
         padding: '3px',
         textTransform: 'lowercase',
     }
