@@ -7,7 +7,7 @@ export default function TodoList(props) {
   return (
     <div style={todoListStyle.form}>
         {props.todos.map(d => (
-          <div style={{textAlign: "left"}}>
+          <div style={todoListStyle.line}>
               <Checkbox /> {d.title}
               {
                 (d.sublabel !== "") ?
@@ -23,7 +23,10 @@ export default function TodoList(props) {
 
 const todoListStyle = {
     form: {
-        margin: '8px',
+      margin: '8px',
+    },
+    line: {
+      textAlign: "left"
     },
     sublabel: {
         fontSize: 'small',

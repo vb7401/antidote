@@ -15,6 +15,7 @@ export default function Header(props) {
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
+
           <Typography variant="h5" style={headerStyle.title}>
             <b>todos #</b>
             {props.pathEl.map(el => (
@@ -26,6 +27,7 @@ export default function Header(props) {
               </React.Fragment>
             ))}
           </Typography>
+          
         </Toolbar>
       </AppBar>
     </div>
