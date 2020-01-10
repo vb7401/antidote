@@ -22,11 +22,14 @@ export default class Login extends React.Component {
     return (
       <div style={loginStyle.outer}>
         <div style={loginStyle.inner}>
-          <h2>antidote</h2>
-          <StyledFirebaseAuth
-            uiConfig={uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
+          <div>
+            <h1>antidote</h1>
+            <StyledFirebaseAuth
+              style={loginStyle.button}
+              uiConfig={uiConfig}
+              firebaseAuth={firebase.auth()}
+            />
+          </div>
         </div>
       </div>
     );
@@ -35,13 +38,22 @@ export default class Login extends React.Component {
 
 const loginStyle = {
   outer: {
+    height: "100vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center"
   },
   inner: {
-    backgroundColor: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    width: "auto"
-  }
+    background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+    color: "white",
+    borderRadius: "15px",
+    padding: "20px",
+    paddingBottom: "35px",
+    width: "auto%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
 };

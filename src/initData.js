@@ -9,19 +9,92 @@ var initDisplay = {
         {
           label: "small",
           labels: ["email", "reimbursement"],
+          children: [
+            {
+              label: "email",
+              labels: [],
+              children: []
+            },
+            {
+              label: "reimbursement",
+              labels: [],
+              children: []
+            },
+          ]
+        },
+        {
+          label: "medium",
+          labels: [],
           children: []
-        }
+        },
+        {
+          label: "large",
+          labels: [],
+          children: []
+        },
       ]
     },
     {
       label: "school",
       labels: ["6.009", "18.600", "24.118", "6.890", "8.02", "6.036"],
-      children: []
+      children: [
+        {
+          label: "6.009",
+          labels: [],
+          children: []
+        },
+        {
+          label: "18.600",
+          labels: [],
+          children: []
+        },
+        {
+          label: "24.118",
+          labels: [],
+          children: []
+        },
+        {
+          label: "6.009",
+          labels: [],
+          children: []
+        },
+        {
+          label: "8.02",
+          labels: [],
+          children: []
+        },
+        {
+          label: "6.036",
+          labels: [],
+          children: []
+        },
+      ]
     },
     {
       label: "goals",
       labels: ["daily", "weekly", "monthly", "yearly"],
-      children: []
+      children: [
+        {
+          label: "daily",
+          labels: [],
+          children: []
+        },
+        {
+          label: "weekly",
+          labels: [],
+          children: []
+        },
+        {
+          label: "monthly",
+          labels: [],
+          children: []
+        },
+        {
+          label: "yearly",
+          labels: [],
+          children: []
+        },
+      ]
     }
   ]
 };

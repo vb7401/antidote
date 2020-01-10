@@ -27,7 +27,6 @@ export default function Header(props) {
               </React.Fragment>
             ))}
           </Typography>
-          
         </Toolbar>
       </AppBar>
     </div>

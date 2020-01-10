@@ -1,21 +1,49 @@
 import React from "react";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import {Router, Route} from "react-router-dom";
+import {createBrowserHistory} from "history";
 import TreePage from "./components/TreePage"
 import Login from './components/Login'
+import firebase from './Firebase'
 
 import "./App.css";
 
-export default function App() {
-  return (
-    <Router>
-      <div className="App">
-        <div className="container">
-          <Route exact path="/">
-            <Login />
-          </Route>
-          <TreePage/>
+const history = createBrowserHistory();
+
+export default class App extends React.Component {
+  state = {
+    user: null
+  }
+
+  componentDidMount() {
+    var self = this
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        self.setState({
+          user: user.uid
+        })
+        history.push("/all");
+      } else {
+        history.push("/login");
+      }
+    })
+  }
+
+  render() {
+    return (
+      <Router history={history}>
+        <div className="App">
+          <div className="container">
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            {
+              (this.state.user != null) ? 
+                <TreePage user={this.state.user}/> : ""
+            }
+          </div>
         </div>
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
+
