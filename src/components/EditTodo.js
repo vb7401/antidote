@@ -16,14 +16,14 @@ export default class EditTodo extends React.Component {
   state = {
     title: this.props.todo.title,
     label: this.props.todo.label,
-    priority: this.props.todo.priority,
+    time: this.props.todo.time,
     sublabel: this.props.todo.sublabel,
     deadline: this.props.todo.deadline,
   };
 
   handleTitle = e => this.setState({ title: e.target.value });
   handleLabel = e => this.setState({ label: e.target.value });
-  handlePriority = e => this.setState({ priority: e.target.value });
+  handleTime = e => this.setState({ time: e.target.value });
   handleSublabel = e => this.setState({ sublabel: e.target.value });
   handleDeadline = e => this.setState({ deadline: e.target.value });
 
@@ -31,7 +31,7 @@ export default class EditTodo extends React.Component {
     this.props.editTodo(this.props.todo.key, {
       title: this.state.title,
       label: this.state.label,
-      priority: this.state.priority,
+      time: this.state.time,
       sublabel: this.state.sublabel,
       deadline: this.state.deadline,
       pathEl: this.props.pathEl
@@ -85,13 +85,13 @@ export default class EditTodo extends React.Component {
               fullWidth
             />
             <TextField
-              value={this.state.priority}
-              onChange={this.handlePriority}
+              value={this.state.time}
+              onChange={this.handleTime}
               required
               autoFocus
               InputLabelProps={{ shrink: true }}
               margin="dense"
-              label="priority"
+              label="time (minutes)"
               variant="outlined"
               fullWidth
             />

@@ -87,7 +87,7 @@ export default class TreePage extends React.Component {
       key: uuid.v4(),
       title: todo.title,
       done: false,
-      priority: todo.priority,
+      time: todo.time,
       deadline: todo.deadline,
       links: links
     });
@@ -150,7 +150,7 @@ export default class TreePage extends React.Component {
       key: uuid.v4(),
       title: todo.title,
       done: false,
-      priority: todo.priority,
+      time: todo.time,
       deadline: todo.deadline,
       links: links
     });
