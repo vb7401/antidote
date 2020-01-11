@@ -21,6 +21,8 @@ export default class App extends React.Component {
         self.setState({
           user: user.uid
         })
+        console.log(history)
+        
         history.push("/all");
       } else {
         history.push("/login");

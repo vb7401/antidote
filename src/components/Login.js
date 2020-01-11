@@ -23,9 +23,10 @@ export default class Login extends React.Component {
       <div style={loginStyle.outer}>
         <div style={loginStyle.inner}>
           <div>
-            <h1>antidote</h1>
+            <h1 style={loginStyle.title}>antidote</h1>
+            <h2 style={loginStyle.subtitle}>for the procrastinator in us.</h2>
             <StyledFirebaseAuth
-              style={loginStyle.button}
+              className={loginStyle.button}
               uiConfig={uiConfig}
               firebaseAuth={firebase.auth()}
             />
@@ -40,20 +41,29 @@ const loginStyle = {
   outer: {
     height: "100vh",
     display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center"
+  },
+  title: {
+    margin: "0px",
+    fontSize: "6vw",
+  },
+  subtitle: {
+    margin: "0 0 1.5vw 0",
+    fontSize: "1.75vw",
   },
   inner: {
+    height: "15vw",
+    width: "30vw",
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
     color: "white",
-    borderRadius: "15px",
+    borderRadius: "20px",
     padding: "20px",
-    paddingBottom: "35px",
-    width: "auto%",
     display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center"
   },
+  button: {
+    width: "3vh",
+  }
 };

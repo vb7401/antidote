@@ -25,6 +25,7 @@ export default class TodoItem extends React.Component {
         <div style={todoItemStyle.line}>
           <div>
             <Checkbox
+              style={todoItemStyle.checkbox}
               checked={this.props.todo.done}
               onChange={this.props.checkTodo.bind(this, this.props.todo.key)}
             />
@@ -66,6 +67,9 @@ export default class TodoItem extends React.Component {
 }
 
 const todoItemStyle = {
+    checkbox: {
+        margin: "none"
+    },
     line: {
       textAlign: "left",
       display: "flex",

@@ -6,23 +6,44 @@ import AddTodo from "./AddTodo";
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Collapse from "@material-ui/core/Collapse";
 
 export default function Todo(props) {
-  const [open, setOpen] = React.useState(false);
+  const [addOpen, setAddOpen] = React.useState(false);
+  const [minOpen, setMinOpen] = React.useState(true);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickAddOpen = () => {
+    setAddOpen(true);
+  };
+  const handleAddClose = () => {
+    setAddOpen(false);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleMinOpen = () => {
+    setMinOpen(true);
+  };
+  const handleMinClose = () => {
+    setMinOpen(false);
   };
 
   return (
     <React.Fragment>
       <Paper style={todoStyle.note}>
         <div style={todoStyle.toprow}>
-          <div />
+          <div>
+            {minOpen ? (
+              <IconButton onClick={handleMinClose} style={todoStyle.add}>
+                <ExpandLessIcon fontSize="small" />
+              </IconButton>
+            ) : (
+              <IconButton onClick={handleMinOpen} style={todoStyle.add}>
+                <ExpandMoreIcon fontSize="small" />
+              </IconButton>
+            )}
+          </div>
+
           <div>
             {props.done ? (
               <Link style={todoStyle.link} to={`/${props.path}/${props.label}`}>
@@ -34,7 +55,7 @@ export default function Todo(props) {
           </div>
 
           <div>
-            <IconButton onClick={handleClickOpen} style={todoStyle.add}>
+            <IconButton onClick={handleClickAddOpen} style={todoStyle.add}>
               <AddIcon fontSize="small" />
             </IconButton>
           </div>
@@ -42,24 +63,26 @@ export default function Todo(props) {
 
         <AddTodo
           label={props.label}
-          handleClose={handleClose}
+          handleClose={handleAddClose}
           addTodo={todo => props.addTodo(todo)}
-          open={open}
+          open={addOpen}
           pathEl={props.pathEl}
         />
 
-        <div style={todoStyle.form}>
-          {formatTodos(props).map(d => (
-            <TodoItem
-              todo={d}
-              addTodo={todo => props.addTodo(todo)}
-              deleteTodo={tid => props.deleteTodo(tid)}
-              checkTodo={tid => props.checkTodo(tid)}
-              editTodo={(tid, todo) => props.editTodo(tid, todo)}
-              pathEl={props.pathEl}
-            />
-          ))}
-        </div>
+        <Collapse in={minOpen} timeout="auto" unmountOnExit>
+            <div style={todoStyle.form}>
+              {formatTodos(props).map(d => (
+                <TodoItem
+                  todo={d}
+                  addTodo={todo => props.addTodo(todo)}
+                  deleteTodo={tid => props.deleteTodo(tid)}
+                  checkTodo={tid => props.checkTodo(tid)}
+                  editTodo={(tid, todo) => props.editTodo(tid, todo)}
+                  pathEl={props.pathEl}
+                />
+              ))}
+            </div>
+        </Collapse>
       </Paper>
     </React.Fragment>
   );
@@ -110,6 +133,7 @@ const todoStyle = {
   toprow: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginBottom: "0px"
   }
 };

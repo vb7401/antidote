@@ -6,7 +6,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import TextField from "@material-ui/core/TextField";
-import { withTheme } from "@material-ui/core";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -39,7 +38,7 @@ export default class AddTodo extends React.Component {
     this.setState({
       title: "",
       label: this.props.label,
-      time: 1,
+      time: 15,
       sublabel: "",
       deadline: null,
     });
@@ -102,7 +101,7 @@ export default class AddTodo extends React.Component {
               fullWidth
             />
             <TextField
-              value={""}
+              value={this.state.deadline}
               onChange={this.handleDeadline}
               InputLabelProps={{ shrink: true }}
               margin="dense"

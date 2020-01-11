@@ -21,22 +21,6 @@ export default class TreePage extends React.Component {
           path: "all"
         }]
       },
-      {
-        title: null,
-        links: [{
-          label: "school",
-          sublabel: "",
-          path: "all"
-        }]
-      },
-      {
-        title: null,
-        links: [{
-          label: "goals",
-          sublabel: "",
-          path: "all"
-        }]
-      },
     ],
     user: null
   };
@@ -214,7 +198,7 @@ export default class TreePage extends React.Component {
 
         <Grid container>
           {d.labels.map(label => (
-            <Grid item xs={4}>
+            <Grid item xs={12} md={4}>
               <Todo
                 todos={this.state.todos}
                 done={toDisplay.some(td => td.path === (d.path + "/" + label))}
