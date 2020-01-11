@@ -1,22 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import TodoList from "./TodoList";
+import TodoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
 
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
 import IconButton from "@material-ui/core/IconButton";
-
-/*
-  - todo:
-    - key       (uuid)
-    - title     (str)
-    - priority  (int)
-    - deadline  (date)
-    - label
-    - sublabel
-    - pathEl:
-*/
 
 export default function Todo(props) {
   const [open, setOpen] = React.useState(false);
@@ -33,6 +22,7 @@ export default function Todo(props) {
     <React.Fragment>
       <Paper style={todoStyle.note}>
         <div style={todoStyle.toprow}>
+          <div />
           <div>
             {props.done ? (
               <Link style={todoStyle.link} to={`/${props.path}/${props.label}`}>
@@ -49,26 +39,39 @@ export default function Todo(props) {
             </IconButton>
           </div>
         </div>
-        <TodoList todos={formatTodos(props)} />
 
         <AddTodo
           label={props.label}
           handleClose={handleClose}
-          addTodo={(todo) => props.addTodo(todo)}
+          addTodo={todo => props.addTodo(todo)}
           open={open}
           pathEl={props.pathEl}
         />
+
+        <div style={todoStyle.form}>
+          {formatTodos(props).map(d => (
+            <TodoItem
+              todo={d}
+              addTodo={todo => props.addTodo(todo)}
+              deleteTodo={tid => props.deleteTodo(tid)}
+              checkTodo={tid => props.checkTodo(tid)}
+              editTodo={(tid, todo) => props.editTodo(tid, todo)}
+              pathEl={props.pathEl}
+            />
+          ))}
+        </div>
       </Paper>
     </React.Fragment>
   );
 }
 
 function formatTodos(props) {
-  var ret = []
+  // filter out title: null
+  var ret = props.todos.filter(e => e.title !== null);
 
   // first filter out links for path
-  ret = props.todos.map(e => ({
-    title: e.title,
+  ret = ret.map(e => ({
+    ...e,
     links: e.links.filter(
       el => el.path === props.path && el.label === props.label
     )
@@ -79,13 +82,17 @@ function formatTodos(props) {
 
   // reformat
   return ret.map(e => ({
-    title: e.title,
+    ...e,
     label: e.links[0].label,
     sublabel: e.links[0].sublabel
   }));
 }
 
 const todoStyle = {
+  form: {
+    marginTop: "8px",
+    marginBottom: "8px"
+  },
   note: {
     padding: "10px",
     margin: "16px",
@@ -98,12 +105,11 @@ const todoStyle = {
     color: "black"
   },
   add: {
-    margin: "none",
-    float: "right"
+    margin: "none"
   },
   toprow: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-between"
   }
 };

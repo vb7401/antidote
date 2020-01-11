@@ -12,13 +12,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default class AddTodo extends React.Component {
+export default class EditTodo extends React.Component {
   state = {
-    title: "",
-    label: this.props.label,
-    priority: 1,
-    sublabel: "",
-    deadline: null
+    title: this.props.todo.title,
+    label: this.props.todo.label,
+    priority: this.props.todo.priority,
+    sublabel: this.props.todo.sublabel,
+    deadline: this.props.todo.deadline,
   };
 
   handleTitle = e => this.setState({ title: e.target.value });
@@ -28,20 +28,13 @@ export default class AddTodo extends React.Component {
   handleDeadline = e => this.setState({ deadline: e.target.value });
 
   handleSubmit = () => {
-    this.props.addTodo({
+    this.props.editTodo(this.props.todo.key, {
       title: this.state.title,
       label: this.state.label,
       priority: this.state.priority,
       sublabel: this.state.sublabel,
       deadline: this.state.deadline,
       pathEl: this.props.pathEl
-    });
-    this.setState({
-      title: "",
-      label: this.props.label,
-      priority: 1,
-      sublabel: "",
-      deadline: null,
     });
     this.props.handleClose();
   };
@@ -54,11 +47,12 @@ export default class AddTodo extends React.Component {
           TransitionComponent={Transition}
           keepMounted
           onClose={this.props.handleClose}
-          style={addTodoStyle.dialog}
+          style={editTodoStyle.dialog}
         >
-          <DialogTitle style={addTodoStyle.title}>
-              add a todo
+          <DialogTitle style={editTodoStyle.title}>
+              edit a todo
           </DialogTitle>
+
           <DialogContent>
             <TextField
               value={this.state.title}
@@ -102,7 +96,7 @@ export default class AddTodo extends React.Component {
               fullWidth
             />
             <TextField
-              value={""}
+              value={this.state.deadline}
               onChange={this.handleDeadline}
               InputLabelProps={{ shrink: true }}
               margin="dense"
@@ -126,10 +120,9 @@ export default class AddTodo extends React.Component {
   }
 }
 
-const addTodoStyle = {
+const editTodoStyle = {
   title: {
     textAlign: "center",
     margin: "0px"
   },
-  dialog: {}
 };
