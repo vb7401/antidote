@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "git fetch && git diff-tree --quiet origin/master && ( npm run build && firebase deploy ) || echo push to github first"
+    "deploy": "git fetch && git diff --quiet origin/master && ( npm run build && firebase deploy ) || echo push to github first"
   },
   "eslintConfig": {
     "extends": "react-app"
