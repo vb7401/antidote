@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "git fetch && git diff-tree --quiet origin/master && ( npm run build && firebase deploy ) || echo push to github first"
   },
   "eslintConfig": {
     "extends": "react-app"
