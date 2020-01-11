@@ -16,17 +16,25 @@ export default function Header(props) {
             <MenuIcon />
           </IconButton>
 
-          <Typography variant="h5" style={headerStyle.title}>
-            <b>todos #</b>
-            {props.pathEl.map(el => (
-              <React.Fragment>
-                {el.ind === "all" ? "" : "/"}
-                <Link to={"/" + el.prefix} style={headerStyle.link}>
-                  {el.ind}
-                </Link>
-              </React.Fragment>
-            ))}
-          </Typography>
+          {(props.todo) ? (
+              <Typography variant="h5" style={headerStyle.title}>
+                <b>todos #</b>
+                {props.pathEl.map(el => (
+                  <React.Fragment>
+                    {el.ind === "all" ? "" : "/"}
+                    <Link to={"/" + el.prefix} style={headerStyle.link}>
+                      {el.ind}
+                    </Link>
+                  </React.Fragment>
+                ))}
+              </Typography>
+            ) : (
+              <Typography variant="h5" style={headerStyle.title}>
+                <b>{props.path}</b>
+              </Typography>
+            )
+          }
+          
         </Toolbar>
       </AppBar>
     </div>

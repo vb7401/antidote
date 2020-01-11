@@ -11,7 +11,7 @@ var config = {
   messagingSenderId: "520819101031",
   appId: "1:520819101031:web:69137f81ada6826c0f33c2",
 
-  clientID: "520819101031-o9s0th0funobumlv7t1kr8tjejmdj9cv.apps.googleusercontent.com",
+  clientID: "520819101031-51gt7dbmbu6hea6stvc60cb5nf1gdfk3.apps.googleusercontent.com",
   scopes: [
       "email",
       "profile",
@@ -24,4 +24,5 @@ var config = {
 
 firebase.initializeApp(config)
 
+export var config;
 export default firebase;

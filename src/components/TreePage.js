@@ -194,7 +194,7 @@ export default class TreePage extends React.Component {
     var toDisplay = this.generateDisplay(this.state.todos)
     return toDisplay.map(d => (
       <Route exact path={`/${d.path}`}>
-        <Header path={d.path} pathEl={d.pathEl} />
+        <Header todo={true} path={d.path} pathEl={d.pathEl} />
 
         <Grid container>
           {d.labels.map(label => (
