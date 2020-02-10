@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TodoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
-import firebase from "../Firebase";
 
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
@@ -10,8 +9,6 @@ import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
-
-let db = firebase.firestore();
 
 export default function Todo(props) {
   var formattedTodos = formatTodos(props)
@@ -119,7 +116,9 @@ function formatTodos(props) {
 
 function compareTodo(a, b) {
   if (a.done == b.done) {
-    return a.deadline < b.deadline;
+    var ad = new Date(a.deadline)
+    var bd = new Date(b.deadline)
+    return ad - bd;
   } else {
     return a.done - b.done;
   }
