@@ -13,14 +13,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default class EditTodo extends React.Component {
-  state = {
-    title: this.props.todo.title,
-    label: this.props.todo.label,
-    time: this.props.todo.time,
-    sublabel: this.props.todo.sublabel,
-    deadline: this.props.todo.deadline,
-  };
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      title: this.props.todo.title,
+      label: this.props.todo.label,
+      time: this.props.todo.time,
+      sublabel: this.props.todo.sublabel,
+      deadline: this.props.todo.deadline,
+    };
+  }
+  
   handleTitle = e => this.setState({ title: e.target.value });
   handleLabel = e => this.setState({ label: e.target.value });
   handleTime = e => this.setState({ time: e.target.value });

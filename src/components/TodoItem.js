@@ -9,15 +9,9 @@ import Link from "@material-ui/core/Link";
 import EditTodo from "./EditTodo";
 
 export default class TodoItem extends React.Component {
-  state = {
-    open: false
-  };
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  state = {open: false};
+  handleClickOpen = () => {this.setState({ open: true });};
+  handleClose = () => {this.setState({ open: false });};
 
   render() {
     return (
@@ -42,7 +36,14 @@ export default class TodoItem extends React.Component {
                 {"#" + this.props.todo.sublabel}
               </Button>
             ) : (
-              ""
+              this.props.todo.deadline !== null ? (
+                <Button
+                  disabled={true}
+                  variant="contained"
+                  style={todoItemStyle.sublabel}>
+                  {this.props.todo.deadline}
+                </Button>
+              ) : ("")
             )}
           </div>
 
@@ -54,6 +55,7 @@ export default class TodoItem extends React.Component {
         </div>
 
         <EditTodo
+          key={this.props.todo.key}
           todo={this.props.todo}
           label={this.props.label}
           handleClose={this.handleClose}

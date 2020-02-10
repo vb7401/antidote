@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import TodoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
+import firebase from "../Firebase";
 
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
@@ -10,9 +11,15 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 
+let db = firebase.firestore();
+
 export default function Todo(props) {
+  var formattedTodos = formatTodos(props)
+  formattedTodos.sort(compareTodo)
+
+  // don't show if > 15 todos
+  const [minOpen, setMinOpen] = React.useState((formattedTodos.length < 15));
   const [addOpen, setAddOpen] = React.useState(false);
-  const [minOpen, setMinOpen] = React.useState(true);
 
   const handleClickAddOpen = () => {
     setAddOpen(true);
@@ -20,7 +27,6 @@ export default function Todo(props) {
   const handleAddClose = () => {
     setAddOpen(false);
   };
-
   const handleMinOpen = () => {
     setMinOpen(true);
   };
@@ -71,7 +77,7 @@ export default function Todo(props) {
 
         <Collapse in={minOpen} timeout="auto" unmountOnExit>
             <div style={todoStyle.form}>
-              {formatTodos(props).map(d => (
+              {formattedTodos.map(d => (
                 <TodoItem
                   todo={d}
                   addTodo={todo => props.addTodo(todo)}
@@ -109,6 +115,14 @@ function formatTodos(props) {
     label: e.links[0].label,
     sublabel: e.links[0].sublabel
   }));
+}
+
+function compareTodo(a, b) {
+  if (a.done == b.done) {
+    return a.deadline < b.deadline;
+  } else {
+    return a.done - b.done;
+  }
 }
 
 const todoStyle = {

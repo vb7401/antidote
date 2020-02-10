@@ -200,6 +200,7 @@ export default class TreePage extends React.Component {
           {d.labels.map(label => (
             <Grid item xs={12} md={4}>
               <Todo
+                id={uuid.v4()}
                 todos={this.state.todos}
                 done={toDisplay.some(td => td.path === (d.path + "/" + label))}
                 pathEl={d.pathEl}
