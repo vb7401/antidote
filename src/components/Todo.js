@@ -5,7 +5,7 @@ import AddTodo from "./AddTodo";
 
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
-import DoneAllIcon from '@material-ui/icons/DoneAll';
+import DoneAllIcon from "@material-ui/icons/DoneAll";
 import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -13,9 +13,9 @@ import Collapse from "@material-ui/core/Collapse";
 import { wait } from "@testing-library/react";
 
 export default function Todo(props) {
-  var formattedTodos = formatTodos(props)
-  formattedTodos.sort(compareTodo)
-  
+  var formattedTodos = formatTodos(props);
+  formattedTodos.sort(compareTodo);
+
   // don't show if on main page
   const [minOpen, setMinOpen] = React.useState(props.path !== "all");
   const [addOpen, setAddOpen] = React.useState(false);
@@ -35,7 +35,7 @@ export default function Todo(props) {
   };
   const toggleDoneShow = () => {
     setDoneShow(!doneShow);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -82,22 +82,41 @@ export default function Todo(props) {
         />
 
         <Collapse in={minOpen} timeout="auto" unmountOnExit>
-            <div style={todoStyle.form}>
-              {formattedTodos.map(d => 
-                (!d.done || doneShow) ?
-                  (
-                    <TodoItem
-                      todo={d}
-                      addTodo={todo => props.addTodo(todo)}
-                      deleteTodo={tid => props.deleteTodo(tid)}
-                      checkTodo={tid => props.checkTodo(tid)}
-                      editTodo={(tid, todo) => props.editTodo(tid, todo)}
-                      pathEl={props.pathEl}
-                    />
-                  ) :
-                  ("")
+          <div style={todoStyle.form}>
+
+            {formattedTodos.map(d =>
+              !d.done ? (
+                <TodoItem
+                  todo={d}
+                  addTodo={todo => props.addTodo(todo)}
+                  deleteTodo={tid => props.deleteTodo(tid)}
+                  checkTodo={tid => props.checkTodo(tid)}
+                  editTodo={(tid, todo) => props.editTodo(tid, todo)}
+                  pathEl={props.pathEl}
+                />
+              ) : (
+                ""
+              )
+            )}
+
+            <Collapse in={doneShow} timeout="auto" unmountOnExit>
+              {formattedTodos.map(d =>
+                d.done ? (
+                  <TodoItem
+                    todo={d}
+                    addTodo={todo => props.addTodo(todo)}
+                    deleteTodo={tid => props.deleteTodo(tid)}
+                    checkTodo={tid => props.checkTodo(tid)}
+                    editTodo={(tid, todo) => props.editTodo(tid, todo)}
+                    pathEl={props.pathEl}
+                  />
+                ) : (
+                  ""
+                )
               )}
-            </div>
+            </Collapse>
+            
+          </div>
         </Collapse>
       </Paper>
     </React.Fragment>
@@ -129,8 +148,8 @@ function formatTodos(props) {
 
 function compareTodo(a, b) {
   if (a.done == b.done) {
-    var ad = new Date(a.deadline)
-    var bd = new Date(b.deadline)
+    var ad = new Date(a.deadline);
+    var bd = new Date(b.deadline);
     return ad - bd;
   } else {
     return a.done - b.done;
