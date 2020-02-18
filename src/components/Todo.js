@@ -5,18 +5,21 @@ import AddTodo from "./AddTodo";
 
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
+import { wait } from "@testing-library/react";
 
 export default function Todo(props) {
   var formattedTodos = formatTodos(props)
   formattedTodos.sort(compareTodo)
-
-  // don't show if > 15 todos
-  const [minOpen, setMinOpen] = React.useState((formattedTodos.length < 15));
+  
+  // don't show if on main page
+  const [minOpen, setMinOpen] = React.useState(props.path !== "all");
   const [addOpen, setAddOpen] = React.useState(false);
+  const [doneShow, setDoneShow] = React.useState(false);
 
   const handleClickAddOpen = () => {
     setAddOpen(true);
@@ -30,6 +33,9 @@ export default function Todo(props) {
   const handleMinClose = () => {
     setMinOpen(false);
   };
+  const toggleDoneShow = () => {
+    setDoneShow(!doneShow);
+  }
 
   return (
     <React.Fragment>
@@ -58,6 +64,9 @@ export default function Todo(props) {
           </div>
 
           <div>
+            <IconButton onClick={toggleDoneShow} style={todoStyle.add}>
+              <DoneAllIcon fontSize="small" />
+            </IconButton>
             <IconButton onClick={handleClickAddOpen} style={todoStyle.add}>
               <AddIcon fontSize="small" />
             </IconButton>
@@ -74,16 +83,20 @@ export default function Todo(props) {
 
         <Collapse in={minOpen} timeout="auto" unmountOnExit>
             <div style={todoStyle.form}>
-              {formattedTodos.map(d => (
-                <TodoItem
-                  todo={d}
-                  addTodo={todo => props.addTodo(todo)}
-                  deleteTodo={tid => props.deleteTodo(tid)}
-                  checkTodo={tid => props.checkTodo(tid)}
-                  editTodo={(tid, todo) => props.editTodo(tid, todo)}
-                  pathEl={props.pathEl}
-                />
-              ))}
+              {formattedTodos.map(d => 
+                (!d.done || doneShow) ?
+                  (
+                    <TodoItem
+                      todo={d}
+                      addTodo={todo => props.addTodo(todo)}
+                      deleteTodo={tid => props.deleteTodo(tid)}
+                      checkTodo={tid => props.checkTodo(tid)}
+                      editTodo={(tid, todo) => props.editTodo(tid, todo)}
+                      pathEl={props.pathEl}
+                    />
+                  ) :
+                  ("")
+              )}
             </div>
         </Collapse>
       </Paper>

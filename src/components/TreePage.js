@@ -16,7 +16,7 @@ export default class TreePage extends React.Component {
       {
         title: null,
         links: [{
-          label: "tasks",
+          label: "todos",
           sublabel: "",
           path: "all"
         }]
