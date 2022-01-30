@@ -1,2 +1,2 @@
 # antidote
-a comprehensive task scheduler. uses min-cost max flow for scheduling.
+a task organizer, built at HackLodge Boston W20.
